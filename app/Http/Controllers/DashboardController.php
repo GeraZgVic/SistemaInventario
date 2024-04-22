@@ -6,10 +6,17 @@ use App\Models\Inventory;
 
 class DashboardController extends Controller
 {
-    public function index() {
-        $inventories = Inventory::orderBy('created_at','desc')->paginate(6);
-        return view('dashboard', [
-            'inventories' => $inventories
+    public function show($id) {
+        
+        $product = Inventory::find($id);
+
+        return view('inventario.show', [
+            'product' => $product
         ]);
+    }
+
+
+    public function index() {
+        return view('dashboard');
     }
 }

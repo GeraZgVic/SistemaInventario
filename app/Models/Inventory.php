@@ -11,7 +11,7 @@ class Inventory extends Model
 
     protected $fillable = [
         'branch_id',
-        'date',
+        // 'date',
         'quantity',
         'brand',
         'model',
