@@ -3,6 +3,7 @@
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Información del Perfil') }}
         </h2>
+        <p class="mt-1 text-sm text-gray-600 font-semibold">Tipo de cuenta: <span class="capitalize font-normal">{{auth()->user()->roles->isNotEmpty() ? auth()->user()->roles[0]->name: 'Sin Rol'}} </span></p>
 
         <p class="mt-1 text-sm text-gray-600">
             {{ __("Actualice la información del perfil y la dirección de correo electrónico de su cuenta.") }}
@@ -57,7 +58,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Guardado.') }}</p>
             @endif
         </div>
     </form>

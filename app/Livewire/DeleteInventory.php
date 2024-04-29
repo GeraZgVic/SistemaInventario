@@ -19,9 +19,8 @@ class DeleteInventory extends Component
 
     public function render()
     {
-        $this->nombre = auth()->user()->name;
         return view('livewire.delete-inventory', [
-            'nombre' => $this->nombre
+            'nombre' => $this->nombre = auth()->user()->name
         ]);
     }
 }

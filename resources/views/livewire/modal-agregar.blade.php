@@ -15,7 +15,7 @@
                 x-transition:leave="ease-in duration-200"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg">
+                class="relative w-full py-6 bg-white px-7 sm:max-w-lg sm:rounded-lg h-[96vh] overflow-y-scroll">
                 <div class="flex items-center justify-between pb-2">
                     <h3 class="text-lg font-semibold capitalize">Agregar a inventario</h3>
                     <button @click="modalOpen=false"
@@ -26,9 +26,7 @@
                         </svg>
                     </button>
                 </div>
-                <form 
-                    wire:submit='save'
-                    class="grid grid-cols-2 gap-1">
+                <form wire:submit='save' class="grid grid-cols-2 gap-1">
                     <!-- Marca -->
                     <div>
                         <x-input-label for="brand" :value="__('Marca')" />
@@ -46,7 +44,6 @@
 
                         <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
                     </div>
-
                     <!-- Modelo -->
                     <div class="col-span-2">
                         <x-input-label for="model" :value="__('Modelo')" />
@@ -68,20 +65,42 @@
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="text" placeholder="Ej: Sin funcionar">
                     </div>
-
-                    <div class="col-span-2">
+                    {{-- Mayorista --}}
+                    <div>
+                        <x-input-label for="wholesaler" :value="__('Mayorista')" />
+                        <input wire:model='wholesaler' id="wholesaler" wire:dirty.class='border-green-500'
+                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                            type="text" placeholder="Escribe el mayorista">
+                        <x-input-error :messages="$errors->get('wholesaler')" class="mt-2" />
+                    </div>
+                    {{-- Sucursal --}}
+                    <div>
                         <x-input-label for="branch_id" :value="__('Sucursal')" />
                         <select wire:model="branch_id" id="branch_id" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm">
                             <option value="">Seleccionar una sucursal</option>
                             @foreach ($branches as $branch)
-                            <option value="{{$branch->id}}">{{$branch->name}}</option>
+                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                             @endforeach
-                            
                         </select>
                         <x-input-error :messages="$errors->get('branch_id')" class="mt-2" />
                     </div>
+                    {{-- SUBIR IMAGEN --}}
+                    <div class="col-span-2" x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+                        x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-cancel="uploading = false"
+                        x-on:livewire-upload-error="uploading = false"
+                        x-on:livewire-upload-progress="progress = $event.detail.progress">
+                        <x-input-label for="image" :value="__('Imagen')" />
+                        <input
+                            class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
+                            id="image" type="file" wire:model="image" accept="image/*">
+                        <x-input-error :messages="$errors->get('image')" class="mt-2" />
 
+                        <div x-show="uploading">
+                            <progress max="100" x-bind:value="progress"></progress>
+                        </div>
+                    </div>
+                    {{-- Descripción --}}
                     <div class="col-span-2">
                         <x-input-label for="description" :value="__('Descripción')" />
                         <textarea wire:model='description' id="description" rows="4" wire:dirty.class='border-green-500'
@@ -90,7 +109,8 @@
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
 
-                    <div class="col-span-2 text-sm text-gray-400" wire:dirty>Los cambios aún no se han guardado...</div> 
+                    <div class="col-span-2 text-sm text-gray-400" wire:dirty>Los cambios aún no se han guardado...
+                    </div>
 
                     <div class="mt-4 col-span-2">
                         <x-primary-button class="">

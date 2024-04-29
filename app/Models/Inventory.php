@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Observers\InventoryObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+#[ObservedBy([InventoryObserver::class])] // Llamando Obeservador
 class Inventory extends Model
 {
     use HasFactory;
@@ -17,7 +20,9 @@ class Inventory extends Model
         'model',
         'serial_number',
         'status',
-        'description'
+        'image',
+        'description',
+        'wholesaler'
     ];
 
 
@@ -25,5 +30,10 @@ class Inventory extends Model
     public function Branch()
     {
         return $this->belongsTo(Branch::class); //Relación de pertenencia
+    }
+
+    public function history()
+    {
+        return $this->hasMany(InventoryHistory::class);
     }
 }

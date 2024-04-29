@@ -26,7 +26,7 @@
                 <p class="text-[13px] font-medium leading-none text-gray-600">Notificación</p>
             </div>
             <!-- Añadir descripción si es necesario -->
-            <p class="text-xs font-medium leading-none text-gray-600 my-2 ml-5">{{$texto}}</p>
+            <p class="text-xs font-medium leading-none text-gray-600 my-2 ml-5 uppercase">{{$texto}}</p>
         </div>
     </span>
 </div>

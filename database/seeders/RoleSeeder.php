@@ -15,11 +15,22 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         // Roles
-        $superadmin = Role::create(['name' => 'superadmin']);
-        $admin = Role::create(['name' => 'admin']);
+        $superadmin = Role::create(['name' => 'superadmin']); //Acceso a Todo | Admin Acceso a solo Inventario.
+        $operador = Role::create(['name' => 'operador']); //Solo administrar inventario
+        $invitado = Role::create(['name' => 'invitado']); //Solo visualizar
 
-        // Permisos
-        Permission::create(['name' => 'dashboard']);
+        // Permiso - Para entrar a la página de Usuarios
+        Permission::create(['name' => 'users.index'])->assignRole($superadmin);
+        // Permiso para ver el inventario
+        Permission::create(['name' => 'dashboard'])->syncRoles([$operador, $invitado, $superadmin]);
+
+        // Permisos para Inventario (CRUD)
+        Permission::create(['name' => 'create.inventory'])->syncRoles([$operador, $superadmin]);
+        Permission::create(['name' => 'update.inventory'])->syncRoles([$operador, $superadmin]);
+        Permission::create(['name' => 'delete.inventory'])->syncRoles([$operador, $superadmin]);
+        Permission::create(['name' => 'show.inventory'])->syncRoles([$operador, $superadmin, $invitado]);
+
+    
 
     }
 }

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('model')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('status')->nullable();
+            $table->string('image')->nullable();
+            $table->string('wholesaler')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

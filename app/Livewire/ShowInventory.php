@@ -34,7 +34,8 @@ class ShowInventory extends Component
             $query->where(function ($innerQuery) {
                 $innerQuery->where('brand', 'LIKE', "%" . $this->search . "%")
                     ->orWhere('serial_number', 'LIKE', "%" . $this->search . "%")
-                    ->orWhere('model', 'LIKE', "%" . $this->search . "%");
+                    ->orWhere('model', 'LIKE', "%" . $this->search . "%")
+                    ->orWhere('wholesaler', 'LIKE', "%" .$this->search . "%");
             });
         }
 

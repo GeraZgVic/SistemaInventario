@@ -28,6 +28,7 @@ class InventoryFactory extends Factory
             'serial_number' => $this->faker->uuid,
             'status' => $this->faker->randomElement(['Funcionando', 'Sin Funcionar', 'En Bodega']),
             'description' => $this->faker->paragraph,
+            'wholesaler' => $this->faker->randomElement(['WESTCON MEXICO SA DE CV', 'SYSCOM Villahermosa']),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => now(),
         ];

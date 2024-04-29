@@ -5,10 +5,13 @@ namespace App\Livewire;
 use App\Models\Branch;
 use Livewire\Component;
 use App\Models\Inventory;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 
 class ModalEditar extends Component
 {
+    use WithFileUploads;
+    
     public $id;
     public $inventory;
 
@@ -24,7 +27,15 @@ class ModalEditar extends Component
     public $description;
     #[Validate('required')]
     public $branch_id;
+    #[Validate('nullable|max:100')]
     public $serial_number;
+    #[Validate('nullable')]
+    public $wholesaler;
+    public $image;
+    
+    #[Validate('image|max:1024|nullable')]
+    public $new_image;
+
 
 
     public function mount() {
@@ -34,6 +45,8 @@ class ModalEditar extends Component
         $this->quantity = $this->inventory['quantity'];
         $this->model = $this->inventory['model'];
         $this->status = $this->inventory['status'];
+        $this->image = $this->inventory['image'];
+        $this->wholesaler = $this->inventory['wholesaler'];
         $this->description = $this->inventory['description'];
         $this->branch_id = $this->inventory['branch_id'];
         $this->serial_number = $this->inventory['serial_number'];
@@ -43,6 +56,11 @@ class ModalEditar extends Component
     {
         $datos = $this->validate();
 
+        if($this->new_image) {
+            $imagen = $this->new_image->store('public/images'); //Retornar la imagen nueva con el 'public/images'
+            $datos['image'] = str_replace('public/images/', '', $imagen); // Retorna la nueva imagen sin el 'public/images'
+        }
+
         $this->inventory->update([
             'brand' => $datos['brand'],
             'quantity' => $datos['quantity'],
@@ -50,7 +68,9 @@ class ModalEditar extends Component
             'serial_number' => $this->serial_number,
             'status' => $datos['status'],
             'description' => $datos['description'],
-            'branch_id' => $datos['branch_id']
+            'wholesaler' => $datos['wholesaler'],
+            'branch_id' => $datos['branch_id'],
+            'image' => $datos['image'] ?? $this->image
         ]);
 
         return redirect()->route('dashboard')->with('alert-success', 'Se Editó Correctamente');
