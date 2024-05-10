@@ -48,31 +48,29 @@
                 {{-- Actualizaciones --}}
                 <div class="text-center mb-6 mt-2">
                     <h3 class="font-bold text-2xl text-gray-800 uppercase">Historial de Actualizaciones</h3>
-                    <p class="text-sm text-gray-600">{{ $historial->count() }} @choice('Actualización|Actualizaciones', $historial->count())</p>
-                </div>                
+                    <p class="text-sm text-gray-600">{{ $historial->count() }} @choice('Actualización|Actualizaciones', $historial->count()) </p>
+                </div>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    @forelse ($historial as $registro)
+                    @foreach ($historial as $registro)
                         @php
                             $originalAttributes = json_decode($registro->original_attributes, true);
                         @endphp
                         <div class="bg-white p-4 rounded-md shadow-md">
-                            <p class="font-semibold">{{ $ordinal($loop->iteration) }} <!-- Número de actualización -->
-                            <p class="font-semibold">Registro ID: {{ $registro->id }}</p>
-                            <p class="text-sm text-gray-500">Fecha de reemplazo: {{ $registro->created_at->format('d-m-Y H:i') }}
+                            <p class="font-semibold text-gray-500">Equipo Anterior No. {{ $loop->iteration }} <!-- Número de actualización -->
+                            <p class="text-sm text-gray-500">Fecha de reemplazo:
+                                {{ $registro->created_at->format('d-m-Y H:i') }}
                             </p>
-                            <p class="font-semibold mt-2">Atributos Originales:</p>
+                            <p class="font-semibold mt-2">Datos Generales</p>
                             @if (is_array($originalAttributes))
                                 <!-- Accede a los valores del array -->
-                                <p>Marca: {{ $originalAttributes['brand'] }}</p>
-                                <p>Modelo: {{ $originalAttributes['model'] }}</p>
-                                <p>Estatus: {{ $originalAttributes['status'] }}</p>
-                                <p>No.Serie: {{ $originalAttributes['serial_number'] }}</p>
+                                <p><span class="font-semibold">Marca:</span> {{ $originalAttributes['brand'] }}</p>
+                                <p><span class="font-semibold">Modelo:</span> {{ $originalAttributes['model'] }}</p>
+                                <p><span class="font-semibold">Estatus:</span> {{ $originalAttributes['status'] }}</p>
+                                <p><span class="font-semibold">No.Serie:</span> {{ $originalAttributes['serial_number'] }}</p>
                                 <!-- Agrega más elementos según los datos que desees mostrar -->
                             @endif
                         </div>
-                    @empty
-                        <p class="font-semibold text-gray-600 text-center col-span-full">Sin Actualizaciones</p>
-                    @endforelse
+                    @endforeach
                 </div>
 
                 <footer class="text-center py-2 my-3">

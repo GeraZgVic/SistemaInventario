@@ -76,7 +76,7 @@
                         <input wire:model='wholesaler' id="wholesaler" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="text" placeholder="Ej: Sin funcionar">
-                            <x-input-error :messages="$errors->get('wholesaler')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('wholesaler')" class="mt-2" />
                     </div>
                     {{-- Sucursal --}}
                     <div>
@@ -97,7 +97,7 @@
                             <img id="image" class="w-auto object-cover h-32"
                                 src="{{ $image ? asset('storage/images/' . $image) : asset('img/not-found.jpg') }}"
                                 alt="{{ 'Imagen ' . $brand }}">
-                            @if ($new_image) 
+                            @if ($new_image)
                                 <img src="{{ $new_image->temporaryUrl() }}" class="w-auto object-cover h-32">
                             @endif
                         </div>
@@ -123,6 +123,26 @@
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
                             placeholder="Agregue una descripción"></textarea>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                    </div>
+
+                    <div class="col-span-2">
+                        <h3 class="text-gray-500 text-center">Campos Adicionales - Opcionales </h3>
+                        <div class="grid grid-cols-2 gap-x-2">
+                            <div>
+                                <x-input-label for="destination" :value="__('Destino')" />
+                                <input wire:model='destination' id="destination" wire:dirty.class='border-green-500'
+                                    class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    type="text" placeholder="Destino del equipo">
+                                <x-input-error :messages="$errors->get('destination')" class="mt-2" />
+                            </div>
+                            <div>
+                                <x-input-label for="replacement_equipment" :value="__('Equipo de Reemplazo')" />
+                                <input wire:model='replacement_equipment' id="replacement_equipment" wire:dirty.class='border-green-500'
+                                    class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    type="text" placeholder="Destino del equipo">
+                                <x-input-error :messages="$errors->get('replacement_equipment')" class="mt-2" />
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-span-2 text-sm text-gray-400" wire:dirty>Los cambios aún no se han guardado...

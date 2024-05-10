@@ -21,15 +21,17 @@
     <header class="z-30 w-full px-2 py-4 bg-white sm:px-4">
         <div class="flex items-center justify-between mx-auto max-w-7xl">
             <a href="/" title="ArSite Inicio" class="font-bold text-xl lg:text-2xl 2xl:text-3xl">
-                ArSite Integradores
+               <img class="w-full h-16 object-cover"
+                    src="{{asset('img/logo-arsite.png')}}" 
+                    alt="Logo Arsite">
             </a>
             <div class="flex items-center space-x-1">
                 <div class="hidden space-x-1 md:inline-flex md:gap-x-4">
                     <a href="{{route('login')}}"
                         class="font-semibold px-3 py-2 hover:bg-black text-gray-800 hover:text-white rounded-md">Iniciar
                         Sesión</a>
-                    <a href="{{route('register')}}"
-                        class="font-semibold px-3 py-2 hover:bg-black text-gray-800 hover:text-white rounded-md">Registrarse</a>
+                    {{-- <a href="{{route('register')}}"
+                        class="font-semibold px-3 py-2 hover:bg-black text-gray-800 hover:text-white rounded-md">Registrarse</a> --}}
                 </div>
                 <div class="inline-flex md:hidden" x-data="{ open: false }">
                     <button class="flex-none px-2 btn-sm" @click="open = true">

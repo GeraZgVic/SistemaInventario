@@ -36,6 +36,11 @@ class ModalEditar extends Component
     #[Validate('image|max:1024|nullable')]
     public $new_image;
 
+    // Campos Opcionales - Table: Inventory Details
+    public $destination;
+    public $replacement_equipment;
+    public $previous_inventory_number;
+    public $later_inventory_number;
 
 
     public function mount() {
