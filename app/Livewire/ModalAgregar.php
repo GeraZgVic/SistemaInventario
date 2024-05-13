@@ -11,11 +11,11 @@ use Livewire\Attributes\Validate;
 class ModalAgregar extends Component
 {
     use WithFileUploads;
+    // #[Validate('required')]
+    // public $quantity;
 
     #[Validate('required')]
     public $brand;
-    #[Validate('required')]
-    public $quantity;
     #[Validate('nullable|max:100')]
     public $model;
     #[Validate('required')]
@@ -45,7 +45,7 @@ class ModalAgregar extends Component
 
         Inventory::create([
             'brand' => $datos['brand'],
-            'quantity' => $datos['quantity'],
+            // 'quantity' => $datos['quantity'],
             'model' => $datos['model'],
             'serial_number' => $this->serial_number,
             'status' => $datos['status'],

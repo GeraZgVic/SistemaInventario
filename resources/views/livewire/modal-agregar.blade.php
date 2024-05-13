@@ -36,16 +36,16 @@
                         <x-input-error :messages="$errors->get('brand')" class="mt-2" />
                     </div>
                     <!-- Cantidad -->
-                    <div>
+                    {{-- <div>
                         <x-input-label for="quantity" :value="__('Cantidad')" />
                         <input wire:model='quantity' id="quantity" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="number" min="0">
 
                         <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
-                    </div>
+                    </div> --}}
                     <!-- Modelo -->
-                    <div class="col-span-2">
+                    <div>
                         <x-input-label for="model" :value="__('Modelo')" />
                         <input wire:model='model' id="model" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"

@@ -40,17 +40,17 @@
                         <x-input-error :messages="$errors->get('brand')" class="mt-2" />
                     </div>
                     <!-- Cantidad -->
-                    <div>
+                    {{-- <div>
                         <x-input-label for="quantity" :value="__('Cantidad')" />
                         <input wire:model='quantity' id="quantity" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="number" min="0">
 
                         <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
-                    </div>
+                    </div> --}}
 
                     <!-- Modelo -->
-                    <div class="col-span-2">
+                    <div>
                         <x-input-label for="model" :value="__('Modelo')" />
                         <input wire:model='model' id="model" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
@@ -125,9 +125,11 @@
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
 
+                    {{-- Campos Adicionales --}}
                     <div class="col-span-2">
-                        <h3 class="text-gray-500 text-center">Campos Adicionales - Opcionales </h3>
+                        <h3 class="text-gray-500 text-center text-lg my-3">Campos Adicionales - Opcionales </h3>
                         <div class="grid grid-cols-2 gap-x-2">
+                            {{-- Destino --}}
                             <div>
                                 <x-input-label for="destination" :value="__('Destino')" />
                                 <input wire:model='destination' id="destination" wire:dirty.class='border-green-500'
@@ -135,12 +137,29 @@
                                     type="text" placeholder="Destino del equipo">
                                 <x-input-error :messages="$errors->get('destination')" class="mt-2" />
                             </div>
-                            <div>
+                            {{-- Equipo de Reemplazo --}}
+                            {{-- <div>
                                 <x-input-label for="replacement_equipment" :value="__('Equipo de Reemplazo')" />
                                 <input wire:model='replacement_equipment' id="replacement_equipment" wire:dirty.class='border-green-500'
                                     class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
-                                    type="text" placeholder="Destino del equipo">
+                                    type="text" placeholder="No. Serie de equipo">
                                 <x-input-error :messages="$errors->get('replacement_equipment')" class="mt-2" />
+                            </div> --}}
+                            {{-- No. Inventario Equipo Anterior --}}
+                            <div>
+                                <x-input-label for="previous_inventory_number" :value="__('No. Inventario Anterior')" />
+                                <input wire:model='previous_inventory_number' id="previous_inventory_number" wire:dirty.class='border-green-500'
+                                    class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    type="text" placeholder="No. Inventario Anterior">
+                                <x-input-error :messages="$errors->get('previous_inventory_number')" class="mt-2" />
+                            </div>
+                            {{-- No. Inventario Equipo Nuevo --}}
+                            <div>
+                                <x-input-label for="later_inventory_number" :value="__('No. Inventario Nuevo')" />
+                                <input wire:model='later_inventory_number' id="later_inventory_number" wire:dirty.class='border-green-500'
+                                    class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    type="text" placeholder="No. Inventario Nuevo">
+                                <x-input-error :messages="$errors->get('later_inventory_number')" class="mt-2" />
                             </div>
                         </div>
                     </div>

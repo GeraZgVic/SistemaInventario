@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\InventoryDetails;
 use App\Models\InventoryHistory;
 
 class DashboardController extends Controller
@@ -11,12 +12,11 @@ class DashboardController extends Controller
     {
 
         $product = Inventory::find($id);
-
         $historial = InventoryHistory::where('inventory_id', $id)->get();
 
         return view('inventario.show', [
             'product' => $product,
-            'historial' => $historial,
+            'historial' => $historial
         ]);
     }
 

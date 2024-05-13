@@ -32,13 +32,26 @@
                             <div>
                                 <p class="font-semibold">Estatus: <span
                                         class="font-normal">{{ $product->status }}</span></p>
-                                <p class="font-semibold">Cantidad: <span
-                                        class="font-normal">{{ $product->quantity }}</span> </p>
+                                {{-- <p class="font-semibold">Cantidad: <span
+                                        class="font-normal">{{ $product->quantity }}</span> </p> --}}
                                 <p class="font-semibold">No. Serie: <span
                                         class="font-normal">{{ $product->serial_number }}</span></p>
                                 <p class="font-semibold">Actualizado: <span
                                         class="font-normal">{{ $product->updated_at->format('d-m-Y H:i') }}</span></p>
                             </div>
+                            @if ($product->details)
+                                <div class="col-span-2">
+                                    <h3 class="font-semibold text-gray-500 text-center">Información Adicional</h3>
+                                    <p class="font-semibold">Ubicación: <span
+                                            class="font-normal">{{ $product->details->destination }}</span></p>
+                                    <p class="font-semibold">No.Inventario de equipo anterior: <span
+                                            class="font-normal">{{ $product->details->previous_inventory_number }}</span>
+                                    </p>
+                                    <p class="font-semibold">No.Inventario de equipo nuevo: <span
+                                            class="font-normal">{{ $product->details->later_inventory_number }}</span>
+                                    </p>
+                                </div>
+                            @endif
                         </div>
                         <h3 class="text-center font-bold uppercase text-lg">Descripción</h3>
                         <p class="text-center"><span class="font-normal">{{ $product->description }}</span></p>
@@ -56,17 +69,25 @@
                             $originalAttributes = json_decode($registro->original_attributes, true);
                         @endphp
                         <div class="bg-white p-4 rounded-md shadow-md">
-                            <p class="font-semibold text-gray-500">Equipo Anterior No. {{ $loop->iteration }} <!-- Número de actualización -->
+                            <div class="flex justify-end">
+                                @can('delete.inventory.history')
+                                    <livewire:delete-history :id="$registro->id" />
+                                @endcan
+                            </div>
+                            <p class="font-semibold text-gray-500">Equipo Anterior No. {{ $loop->iteration }}
+                                <!-- Número de actualización -->
                             <p class="text-sm text-gray-500">Fecha de reemplazo:
                                 {{ $registro->created_at->format('d-m-Y H:i') }}
                             </p>
                             <p class="font-semibold mt-2">Datos Generales</p>
                             @if (is_array($originalAttributes))
                                 <!-- Accede a los valores del array -->
-                                <p><span class="font-semibold">Marca:</span> {{ $originalAttributes['brand'] }}</p>
-                                <p><span class="font-semibold">Modelo:</span> {{ $originalAttributes['model'] }}</p>
-                                <p><span class="font-semibold">Estatus:</span> {{ $originalAttributes['status'] }}</p>
-                                <p><span class="font-semibold">No.Serie:</span> {{ $originalAttributes['serial_number'] }}</p>
+                                <p><span class="font-semibold">Marca: </span> {{ $originalAttributes['brand'] }}</p>
+                                <p><span class="font-semibold">Modelo: </span> {{ $originalAttributes['model'] }}</p>
+                                <p><span class="font-semibold">Estatus anterior: </span> {{ $originalAttributes['status'] ?? 'Dañado' }}</p>
+                                <p><span class="font-semibold">Estatus actual: </span> {{ 'Dañado' }}</p>
+                                <p><span class="font-semibold">No.Serie: </span>
+                                    {{ $originalAttributes['serial_number'] }}</p>
                                 <!-- Agrega más elementos según los datos que desees mostrar -->
                             @endif
                         </div>

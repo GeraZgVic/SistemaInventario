@@ -17,7 +17,7 @@
     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3">Cantidad</th>
+                {{-- <th scope="col" class="px-6 py-3">Cantidad</th> --}}
                 <th scope="col" class="px-6 py-3">Marca</th>
                 <th scope="col" class="px-6 py-3">Modelo</th>
                 <th scope="col" class="px-6 py-3">No. Serie</th>
@@ -30,8 +30,8 @@
         <tbody>
             @foreach ($inventories as $inventory)
                 <tr wire:key='{{ $inventory->id }}' class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }} border-b">
-                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                        {{ $inventory->quantity }}</td>
+                    {{-- <td wire:key='{{ $inventory->id }}' class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{ $inventory->quantity }}</td> --}}
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->brand }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->model }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->serial_number }}</td>

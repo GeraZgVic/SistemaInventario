@@ -30,6 +30,9 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'delete.inventory'])->syncRoles([$operador, $superadmin]);
         Permission::create(['name' => 'show.inventory'])->syncRoles([$operador, $superadmin, $invitado]);
 
+        // Permiso para eliminar Historia del producto
+        Permission::create(['name' => 'delete.inventory.history'])->syncRoles([$operador,$superadmin]);
+        
     
 
     }

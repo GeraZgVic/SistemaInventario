@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('inventory_id')->constrained()->onDelete('cascade');
             $table->string('destination')->nullable();
-            $table->string('replacement_equipment')->nullable();
+            // $table->string('replacement_equipment')->nullable();
             $table->string('previous_inventory_number')->nullable();
             $table->string('later_inventory_number')->nullable();
             $table->timestamps();

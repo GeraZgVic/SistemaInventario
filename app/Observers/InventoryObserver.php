@@ -16,7 +16,6 @@ class InventoryObserver
     {
         // Obtener los atributos originales antes de la actualización
         $originalAttributes = $inventory->getOriginal();
-
         // Guardar los atributos originales en la tabla de historial
         $history = new InventoryHistory();
         $history->inventory_id = $inventory->id;

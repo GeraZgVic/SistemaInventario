@@ -15,7 +15,7 @@ class Inventory extends Model
     protected $fillable = [
         'branch_id',
         // 'date',
-        'quantity',
+        // 'quantity',
         'brand',
         'model',
         'serial_number',
@@ -35,5 +35,9 @@ class Inventory extends Model
     public function history()
     {
         return $this->hasMany(InventoryHistory::class);
+    }
+
+    public function details() {
+        return $this->hasOne(InventoryDetails::class);
     }
 }

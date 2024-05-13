@@ -6,6 +6,7 @@ use App\Models\Branch;
 use Livewire\Component;
 use App\Models\Inventory;
 use Livewire\WithFileUploads;
+use App\Models\InventoryDetails;
 use Livewire\Attributes\Validate;
 
 class ModalEditar extends Component
@@ -14,11 +15,11 @@ class ModalEditar extends Component
     
     public $id;
     public $inventory;
+    // #[Validate('required')]
+    // public $quantity;
 
     #[Validate('required')]
     public $brand;
-    #[Validate('required')]
-    public $quantity;
     #[Validate('max:40')]
     public $model;
     #[Validate('required')]
@@ -38,7 +39,6 @@ class ModalEditar extends Component
 
     // Campos Opcionales - Table: Inventory Details
     public $destination;
-    public $replacement_equipment;
     public $previous_inventory_number;
     public $later_inventory_number;
 
@@ -47,7 +47,7 @@ class ModalEditar extends Component
         $this->inventory = Inventory::find($this->id);
         // Sincronizar formulario con la DB
         $this->brand = $this->inventory['brand'];
-        $this->quantity = $this->inventory['quantity'];
+        // $this->quantity = $this->inventory['quantity'];
         $this->model = $this->inventory['model'];
         $this->status = $this->inventory['status'];
         $this->image = $this->inventory['image'];
@@ -68,7 +68,7 @@ class ModalEditar extends Component
 
         $this->inventory->update([
             'brand' => $datos['brand'],
-            'quantity' => $datos['quantity'],
+            // 'quantity' => $datos['quantity'],
             'model' => $datos['model'],
             'serial_number' => $this->serial_number,
             'status' => $datos['status'],
@@ -78,7 +78,14 @@ class ModalEditar extends Component
             'image' => $datos['image'] ?? $this->image
         ]);
 
-        return redirect()->route('dashboard')->with('alert-success', 'Se Editó Correctamente');
+        InventoryDetails::create([
+            'inventory_id' => $this->id,
+            'destination' => $this->destination,
+            'previous_inventory_number' => $this->previous_inventory_number,
+            'later_inventory_number' => $this->later_inventory_number
+        ]);
+
+        return redirect()->route('dashboard')->with('alert-success', 'Se Actualizó Correctamente');
     }
 
     public function render()

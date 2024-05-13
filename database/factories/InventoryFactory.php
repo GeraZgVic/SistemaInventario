@@ -22,7 +22,7 @@ class InventoryFactory extends Factory
     {
         return [
             'branch_id' => $this->faker->numberBetween(1, 2),
-            'quantity' => $this->faker->numberBetween(1, 100),
+            // 'quantity' => $this->faker->numberBetween(1, 100),
             'brand' => $this->faker->word,
             'model' => $this->faker->word,
             'serial_number' => $this->faker->uuid,
