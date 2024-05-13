@@ -147,6 +147,13 @@
                             </div> --}}
                             {{-- No. Inventario Equipo Anterior --}}
                             <div>
+                                <x-input-label for="departure_date" :value="__('Fecha de Salida')" />
+                                <input wire:model='departure_date' id="departure_date" wire:dirty.class='border-green-500'
+                                    class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                                    type="date">
+                                <x-input-error :messages="$errors->get('departure_date')" class="mt-2" />
+                            </div>
+                            <div>
                                 <x-input-label for="previous_inventory_number" :value="__('No. Inventario Anterior')" />
                                 <input wire:model='previous_inventory_number' id="previous_inventory_number" wire:dirty.class='border-green-500'
                                     class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"

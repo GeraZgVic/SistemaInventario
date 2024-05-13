@@ -9,13 +9,15 @@ class DeleteHistory extends Component
 {
     public $id;
     public $nombre;
+    public $idProduct;
 
-    
+
     public function delete()
     {
         $inventoryHistory = InventoryHistory::find($this->id);
         $inventoryHistory->delete();
-        return redirect()->route('dashboard')->with('alert-danger', 'Se Eliminó Correctamente');
+        
+        return redirect()->route('inventory.show', $this->idProduct)->with('alert-danger', 'Se Eliminó Correctamente');
     }
 
     public function render()

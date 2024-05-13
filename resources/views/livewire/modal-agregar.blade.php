@@ -64,6 +64,7 @@
                         <input wire:model='status' id="status" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="text" placeholder="Ej: Sin funcionar">
+                        <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
                     {{-- Mayorista --}}
                     <div>

@@ -10,6 +10,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 flex flex-col md:flex-row gap-4">
+                    @if (session('alert-danger'))
+                        <livewire:alert-danger :texto="session('alert-danger')" />
+                    @endif
                     {{-- IMG --}}
                     <img class="object-cover max-w-lg rounded"
                         src="{{ $product->image ? asset('storage/images/' . $product->image) : asset('img/not-found.jpg') }}"
@@ -42,8 +45,10 @@
                             @if ($product->details)
                                 <div class="col-span-2">
                                     <h3 class="font-semibold text-gray-500 text-center">Información Adicional</h3>
-                                    <p class="font-semibold">Ubicación: <span
+                                    <p class="font-semibold">Destino: <span
                                             class="font-normal">{{ $product->details->destination }}</span></p>
+                                    <p class="font-semibold">Fecha de Salida: <span
+                                            class="font-normal">{{ $product->details->departure_date }}</span></p>
                                     <p class="font-semibold">No.Inventario de equipo anterior: <span
                                             class="font-normal">{{ $product->details->previous_inventory_number }}</span>
                                     </p>
@@ -71,7 +76,7 @@
                         <div class="bg-white p-4 rounded-md shadow-md">
                             <div class="flex justify-end">
                                 @can('delete.inventory.history')
-                                    <livewire:delete-history :id="$registro->id" />
+                                    <livewire:delete-history :key="$registro->id" :id="$registro->id" :idProduct="$product->id" />
                                 @endcan
                             </div>
                             <p class="font-semibold text-gray-500">Equipo Anterior No. {{ $loop->iteration }}
@@ -84,7 +89,7 @@
                                 <!-- Accede a los valores del array -->
                                 <p><span class="font-semibold">Marca: </span> {{ $originalAttributes['brand'] }}</p>
                                 <p><span class="font-semibold">Modelo: </span> {{ $originalAttributes['model'] }}</p>
-                                <p><span class="font-semibold">Estatus anterior: </span> {{ $originalAttributes['status'] ?? 'Dañado' }}</p>
+                                <p><span class="font-semibold">Estatus anterior: </span> {{ $originalAttributes['status'] ?? 'Sin estatus' }}</p>
                                 <p><span class="font-semibold">Estatus actual: </span> {{ 'Dañado' }}</p>
                                 <p><span class="font-semibold">No.Serie: </span>
                                     {{ $originalAttributes['serial_number'] }}</p>

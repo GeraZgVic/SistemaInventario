@@ -41,6 +41,7 @@ class ModalEditar extends Component
     public $destination;
     public $previous_inventory_number;
     public $later_inventory_number;
+    public $departure_date;
 
 
     public function mount() {
@@ -82,7 +83,8 @@ class ModalEditar extends Component
             'inventory_id' => $this->id,
             'destination' => $this->destination,
             'previous_inventory_number' => $this->previous_inventory_number,
-            'later_inventory_number' => $this->later_inventory_number
+            'later_inventory_number' => $this->later_inventory_number,
+            'departure_date' => $this->departure_date
         ]);
 
         return redirect()->route('dashboard')->with('alert-success', 'Se Actualizó Correctamente');

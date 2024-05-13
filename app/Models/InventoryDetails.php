@@ -13,7 +13,8 @@ class InventoryDetails extends Model
         'inventory_id',
         'destination',
         'previous_inventory_number',
-        'later_inventory_number'
+        'later_inventory_number',
+        'departure_date'
     ];
 
     // Inventario Pertenece a InventoryDetails
