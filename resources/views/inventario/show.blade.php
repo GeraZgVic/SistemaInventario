@@ -9,6 +9,9 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="flex justify-start px-4 py-2">
+                        <livewire:return-back :routeName="'dashboard'" />
+                </div>
                 <div class="p-6 text-gray-900 flex flex-col md:flex-row gap-4">
                     @if (session('alert-danger'))
                         <livewire:alert-danger :texto="session('alert-danger')" />
@@ -75,21 +78,26 @@
                         @endphp
                         <div class="bg-white p-4 rounded-md shadow-md">
                             <div class="flex justify-end">
+                                <a href="{{route('history.show', $registro->id)}}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-green-600 hover:text-green-800">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                      </svg>                                      
+                                </a>
                                 @can('delete.inventory.history')
                                     <livewire:delete-history :key="$registro->id" :id="$registro->id" :idProduct="$product->id" />
                                 @endcan
+                                
                             </div>
                             <p class="font-semibold text-gray-500">Equipo Anterior No. {{ $loop->iteration }}
                                 <!-- Número de actualización -->
                             <p class="text-sm text-gray-500">Fecha de reemplazo:
                                 {{ $registro->created_at->format('d-m-Y H:i') }}
                             </p>
-                            <p class="font-semibold mt-2">Datos Generales</p>
+        
                             @if (is_array($originalAttributes))
                                 <!-- Accede a los valores del array -->
                                 <p><span class="font-semibold">Marca: </span> {{ $originalAttributes['brand'] }}</p>
-                                <p><span class="font-semibold">Modelo: </span> {{ $originalAttributes['model'] }}</p>
-                                <p><span class="font-semibold">Estatus anterior: </span> {{ $originalAttributes['status'] ?? 'Sin estatus' }}</p>
                                 <p><span class="font-semibold">Estatus actual: </span> {{ 'Dañado' }}</p>
                                 <p><span class="font-semibold">No.Serie: </span>
                                     {{ $originalAttributes['serial_number'] }}</p>

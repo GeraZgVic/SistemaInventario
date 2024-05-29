@@ -17,10 +17,7 @@
 
                     <livewire:modal-agregar />
 
-                    {{-- TABLA --}}
                     <livewire:show-inventory />
-                    
-
                     
                 </div>
             </div>

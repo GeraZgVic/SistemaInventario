@@ -8,6 +8,7 @@ use App\Models\InventoryHistory;
 
 class DashboardController extends Controller
 {
+
     public function show($id)
     {
 
@@ -17,6 +18,18 @@ class DashboardController extends Controller
         return view('inventario.show', [
             'product' => $product,
             'historial' => $historial
+        ]);
+    }
+
+    public function showHistory($id)
+    {
+        $historial = InventoryHistory::where('id', $id)->get();
+        $inventoryId = $historial->first()->inventory_id;
+        $product = Inventory::find($inventoryId);
+
+        return view('inventario.showHistory', [
+            'historial' => $historial,
+            'product' => $product
         ]);
     }
 

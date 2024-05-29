@@ -11,6 +11,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/inventory/{id}', [DashboardController::class, 'show'])->middleware(['auth'])->name('inventory.show');
+Route::get('/inventory/history/{id}', [DashboardController::class, 'showHistory'])->middleware(['auth'])->name('history.show');
 
 Route::get('/users', [UserController::class, 'index'])->middleware('can:users.index')->name('users.index');
 
