@@ -34,9 +34,9 @@
                         {{ $inventory->quantity }}</td> --}}
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->brand }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->model }}</td>
-                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->serial_number }}</td>
+                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->serial_number ? $inventory->serial_number : 'Sin numero de serie' }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->status }}</td>
-                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->wholesaler }}</td>
+                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->wholesaler ? $inventory->wholesaler : 'Sin Mayorista' }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->branch->name }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">
                         <div class="flex items-center">

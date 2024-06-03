@@ -15,10 +15,13 @@
                         <livewire:alert-danger :texto="session('alert-danger')" />
                     @endif
 
-                    <livewire:modal-agregar />
+                    <div class="flex justify-between">
+                        <livewire:modal-agregar />
+                        <livewire:export-excel />
+                    </div>
 
                     <livewire:show-inventory />
-                    
+
                 </div>
             </div>
         </div>
