@@ -55,11 +55,11 @@
                             </svg>
                             <span class="sr-only">Close Menu</span>
                         </button>
-                        <a href="#"
+                        <a href="{{route('login')}}"
                             class="font-semibold px-3 py-2 hover:bg-black text-gray-800 hover:text-white rounded-md text-center">Iniciar
                             Sesión</a>
-                        <a href="#"
-                            class="font-semibold px-3 py-2 hover:bg-black text-gray-800 hover:text-white rounded-md text-center">Registrarse</a>
+                        {{-- <a href="#"
+                            class="font-semibold px-3 py-2 hover:bg-black text-gray-800 hover:text-white rounded-md text-center">Registrarse</a> --}}
                     </div>
                 </div>
             </div>
@@ -67,35 +67,36 @@
     </header>
 
     <main>
-        <section class="flex items-center justify-center py-10 text-white bg-white sm:py-16 md:py-24 lg:py-32">
-            <div class="relative max-w-3xl px-10 text-center text-white auto lg:px-0">
-                <div class="flex flex-col w-full md:flex-row">
-        
-                    <!-- Top Text -->
-                    <div class="flex md:justify-between justify-center">
-                        <h1 class="relative flex flex-col text-4xl md:text-6xl font-extrabold text-center md:text-left text-black">
-                           ArSite
-                            <span>Sistema de</span>
-                            <span>Inventario</span>
+        <section class="flex flex-col items-center justify-center py-10 text-gray-600 sm:py-16 md:py-24 lg:py-32">
+            <div class="container mx-auto px-6 lg:px-8 text-center">
+                <!-- Header Text and Image Section -->
+                <div class="flex flex-col md:flex-row items-center md:justify-between">
+                    <!-- Text Section -->
+                    <div class="mb-8 md:mb-0 md:w-1/2">
+                        <h1 class="text-7xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+                            <span class="block">ArSite</span>
+                            <span class="block text-3xl md:text-4xl">Sistema de Inventario</span>
                         </h1>
                     </div>
-                    <!-- Right Image -->
-                    <div class="relative top-0 right-0 h-64 mt-12 md:-mt-16 md:absolute md:h-96">
-                        <img src="https://cdn.devdojo.com/images/december2020/designs3d.png" class="object-cover mt-3 mr-5 h-80 lg:h-96">
+                    <!-- Image Section -->
+                    <div class="w-full md:w-1/2 flex justify-center">
+                        <img src="{{asset('img/welcome.svg')}}" alt="Imagen" class="object-cover max-w-full h-auto">
                     </div>
                 </div>
-        
+    
                 <!-- Separator -->
-                <div class="my-16 border-b border-gray-300 lg:my-24"></div>
-        
+                <div class="my-12 border-b border-gray-700 lg:my-16"></div>
+    
                 <!-- Bottom Text -->
-                <h2 class="text-left text-gray-500 xl:text-xl">
-                    ¡Bienvenido a nuestro avanzado sistema de gestión de inventario de Arsite Integradores! Sumérgete en una experiencia única diseñada para simplificar la gestión de tu inventario de networking. Descubre cómo nuestra plataforma puede optimizar tus operaciones, brindándote las herramientas necesarias para potenciar tus conexiones y llevar tu negocio al siguiente nivel.
-                </h2>
+                <div class="text-gray-600 text-base md:text-lg lg:text-xl">
+                    <p>
+                        ¡Bienvenido a nuestro avanzado sistema de gestión de inventario de Arsite Integradores! Sumérgete en una experiencia única diseñada para simplificar la gestión de tu inventario de networking. Descubre cómo nuestra plataforma puede optimizar tus operaciones, brindándote las herramientas necesarias para potenciar tus conexiones y llevar tu negocio al siguiente nivel.
+                    </p>
+                </div>
             </div>
         </section>
-        
     </main>
+    
     @livewireScripts
 
 </body>

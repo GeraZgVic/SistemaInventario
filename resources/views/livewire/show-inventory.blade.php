@@ -21,6 +21,7 @@
                 <th scope="col" class="px-6 py-3">Marca</th>
                 <th scope="col" class="px-6 py-3">Modelo</th>
                 <th scope="col" class="px-6 py-3">No. Serie</th>
+                <th scope="col" class="px-6 py-3">No. Parte</th>
                 <th scope="col" class="px-6 py-3">Estatus</th>
                 <th scope="col" class="px-6 py-3">Mayorista</th>
                 <th scope="col" class="px-6 py-3">Sucursal</th>
@@ -32,9 +33,10 @@
                 <tr wire:key='{{ $inventory->id }}' class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }} border-b">
                     {{-- <td wire:key='{{ $inventory->id }}' class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{ $inventory->quantity }}</td> --}}
-                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->brand }}</td>
+                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->brand->name ?? 'Sin marca' }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->model }}</td>
-                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->serial_number ? $inventory->serial_number : 'Sin numero de serie' }}</td>
+                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->serial_number ? $inventory->serial_number : 'S/N' }}</td>
+                    <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->part_number ? $inventory->part_number : 'S/N' }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->status }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->wholesaler ? $inventory->wholesaler : 'Sin Mayorista' }}</td>
                     <td wire:key='{{ $inventory->id }}' class="px-6 py-4">{{ $inventory->branch->name }}</td>

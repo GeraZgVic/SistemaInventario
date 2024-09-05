@@ -2,7 +2,7 @@
     <div class='mb-2 flex p-1'>
         {{-- BUSCAR POR TERMINO--}}
         
-        <input placeholder="Buscar por termino"
+        <input placeholder="Buscar por término"
             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-md text-sm"
             id="search" type="text" wire:model.live.debounce.150ms="search">
 

@@ -15,4 +15,15 @@ class InventoryHistory extends Model
     {
         return $this->belongsTo(Inventory::class);
     }
+
+     // Una sucursal pertenece a un inventario
+     public function Branch()
+     {
+         return $this->belongsTo(Branch::class); //Relación de pertenencia
+     }
+     // Una marca pertenece a un producto del inventario
+     public function Brand()
+     {
+         return $this->belongsTo(Brand::class); //Relación de pertenencia
+     }
 }

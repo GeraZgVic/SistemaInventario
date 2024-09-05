@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained('branches')->onDelete('cascade');
             // $table->date('date'); // Podemos usar timestamps para eso.
             // $table->integer('quantity'); //No se usará
-            $table->string('brand');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->string('model')->nullable();
             $table->string('serial_number')->nullable();
+            $table->string('part_number')->nullable();
             $table->string('status')->nullable();
             $table->string('image')->nullable();
             $table->string('wholesaler')->nullable();

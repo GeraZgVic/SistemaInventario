@@ -17,14 +17,16 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 class InventoryExport implements FromCollection, WithMapping, ShouldAutoSize, WithHeadings, WithStyles
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     protected $branch_id;
+    protected $brand_id;
 
     // Recibir el ID de la sucursal como parámetro en el constructor
-    public function __construct($branch_id)
+    public function __construct($branch_id, $brand_id)
     {
         $this->branch_id = $branch_id;
+        $this->brand_id = $brand_id;
     }
 
     public function collection()
@@ -37,16 +39,25 @@ class InventoryExport implements FromCollection, WithMapping, ShouldAutoSize, Wi
                 $innerQuery->where('id', $this->branch_id);
             });
         }
+        // Filtrar los inventarios según el ID de la marca seleccionada
+        if ($this->brand_id) {
+            $query->whereHas('brand', function ($innerQuery) {
+                $innerQuery->where('id', $this->brand_id);
+            });
+        }
+
         return $query->get();
     }
-    
-    public function map($inventory): array {
+
+    public function map($inventory): array
+    {
         return [
             $inventory->id,
             $inventory->branch->name, // Aquí obtenemos el nombre de la sucursal
-            $inventory->brand,
+            $inventory->brand->name,
             $inventory->model,
             $inventory->serial_number,
+            $inventory->part_number,
             $inventory->status,
             $inventory->wholesaler,
             $inventory->description,
@@ -63,6 +74,7 @@ class InventoryExport implements FromCollection, WithMapping, ShouldAutoSize, Wi
             'MARCA',
             'MODELO',
             'NUMERO DE SERIE',
+            'NUMERO DE PARTE',
             'ESTATUS',
             'MAYORISTA',
             'DESCRIPCIÓN',
@@ -92,6 +104,5 @@ class InventoryExport implements FromCollection, WithMapping, ShouldAutoSize, Wi
                 'startColor' => ['rgb' => 'CCCCCC'],
             ],
         ]);
-
     }
 }

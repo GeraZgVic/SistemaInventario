@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Brand;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +24,15 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(BranchSeeder::class);
+
+        // Insertar datos en la tabla 'brands'
+        DB::table('brands')->insert([
+            ['name' => 'Aruba', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Fortinet', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'H3C', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+
         $this->call(InventarioFake::class);
     }
 }

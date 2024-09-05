@@ -29,7 +29,7 @@ class ModalAgregarUser extends Component
             'password' => Hash::make($datos['password'])
         ]);
 
-        return redirect()->route('users.index')->with('alert-success', 'Se Agregó Correctamente');
+        return redirect()->route('users.index')->with('alert-success', 'AGREGADO CORRECTAMENTE');
     }
 
     public function render()

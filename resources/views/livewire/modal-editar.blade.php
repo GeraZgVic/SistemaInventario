@@ -33,28 +33,24 @@
                 <form wire:submit='update' class="grid grid-cols-2 gap-1">
                     <!-- Marca -->
                     <div>
-                        <x-input-label for="brand" :value="__('Marca')" />
-                        <input wire:model='brand' id="brand" wire:dirty.class='border-green-500'
-                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
-                            type="text" placeholder="Ej: Fortinet">
-                        <x-input-error :messages="$errors->get('brand')" class="mt-2" />
+                        <x-input-label for="brand_id" :value="__('Marca')" />
+                        <select wire:model="brand_id" id="brand_id" wire:dirty.class='border-green-500'
+                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm">
+                            <option value="">Seleccionar Marca</option>
+                            @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('brand_id')" class="mt-2" />
                     </div>
-                    <!-- Cantidad -->
-                    {{-- <div>
-                        <x-input-label for="quantity" :value="__('Cantidad')" />
-                        <input wire:model='quantity' id="quantity" wire:dirty.class='border-green-500'
-                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
-                            type="number" min="0">
-
-                        <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
-                    </div> --}}
-
+                    
                     <!-- Modelo -->
                     <div>
                         <x-input-label for="model" :value="__('Modelo')" />
                         <input wire:model='model' id="model" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="text" placeholder="Ej: TMK S1">
+                            <x-input-error :messages="$errors->get('model')" class="mt-2" />
                     </div>
                     <!-- Numero de Serie -->
                     <div>
@@ -62,6 +58,14 @@
                         <input wire:model='serial_number' id="serial_number" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="text" placeholder="Ej: 844D09V04">
+                            <x-input-error :messages="$errors->get('serial_number')" class="mt-2" />
+                    </div>
+                    <div>
+                        <x-input-label for="part_number" :value="__('Numero de Parte')" />
+                        <input wire:model='part_number' id="part_number" wire:dirty.class='border-green-500'
+                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                            type="text" placeholder="Ej: 844D09V04">
+                            <x-input-error :messages="$errors->get('part_number')" class="mt-2" />
                     </div>
                     <!-- Estatus -->
                     <div>
@@ -69,6 +73,7 @@
                         <input wire:model='status' id="status" wire:dirty.class='border-green-500'
                             class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
                             type="text" placeholder="Ej: Sin funcionar">
+                            <x-input-error :messages="$errors->get('status')" class="mt-2" />
                     </div>
                     {{-- Mayorista --}}
                     <div>

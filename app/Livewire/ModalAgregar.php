@@ -2,20 +2,19 @@
 
 namespace App\Livewire;
 
+use App\Models\Brand;
 use App\Models\Branch;
-use App\Models\Inventory;
 use Livewire\Component;
+use App\Models\Inventory;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 
 class ModalAgregar extends Component
 {
     use WithFileUploads;
-    // #[Validate('required')]
-    // public $quantity;
-
+  
     #[Validate('required')]
-    public $brand;
+    public $brand_id;
     #[Validate('nullable|max:100')]
     public $model;
     #[Validate('required')]
@@ -30,6 +29,9 @@ class ModalAgregar extends Component
     public $wholesaler;
     #[Validate('nullable|max:100')]
     public $serial_number;
+    #[Validate('nullable|max:200')]
+    public $part_number;
+
 
     public function save()
     {
@@ -44,8 +46,8 @@ class ModalAgregar extends Component
         $nombreImagen = $datos['image'];
 
         Inventory::create([
-            'brand' => $datos['brand'],
-            // 'quantity' => $datos['quantity'],
+            'brand_id' => $datos['brand_id'],
+            'part_number' => $datos['part_number'],
             'model' => $datos['model'],
             'serial_number' => $this->serial_number,
             'status' => $datos['status'],
@@ -55,15 +57,17 @@ class ModalAgregar extends Component
             'image' => $nombreImagen
         ]);
 
-        return redirect()->route('dashboard')->with('alert-success', 'Se Agregó Correctamente');
+        return redirect()->route('dashboard')->with('alert-success', 'AGREGADO CORRECTAMENTE');
     }
 
     public function render()
     {
         $branches = Branch::all();
+        $brands = Brand::all();
 
         return view('livewire.modal-agregar', [
-            'branches' => $branches
+            'branches' => $branches,
+            'brands' => $brands
         ]);
     }
 }

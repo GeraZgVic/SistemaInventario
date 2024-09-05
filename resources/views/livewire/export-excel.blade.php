@@ -28,9 +28,8 @@
                     </button>
                 </div>
 
-                <h2 class="text-gray-500 text-base font-bold my-1">Selecciona la Sucursal</h2>
-
                 <form action="{{ route('documento.excel') }}" method="GET">
+                    <h3 class="text-gray-500 text-base font-bold my-1">Selecciona la Sucursal</h3>
                     <select name="branch_id"
                         class="block w-full border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
                         <option value="">Ambas</option>
@@ -38,6 +37,16 @@
                             <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                         @endforeach
                     </select>
+
+                    <h3 class="text-gray-500 text-base font-bold my-1">Filtrar por marca</h3>
+                    <select name="brand_id"
+                        class="block w-full border-gray-300 rounded-md shadow-sm focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                        <option value="">Todas</option>
+                        @foreach ($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+
                     <button type="submit"
                         class="inline-flex items-center justify-center h-10 px-4 py-2 mt-2 text-sm font-medium transition-colors bg-green-500 border rounded-md hover:bg-green-600 text-white 
                         active:bg-green-600 focus:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">

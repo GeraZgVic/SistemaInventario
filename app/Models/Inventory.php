@@ -15,10 +15,10 @@ class Inventory extends Model
     protected $fillable = [
         'branch_id',
         // 'date',
-        // 'quantity',
-        'brand',
+        'brand_id',
         'model',
         'serial_number',
+        'part_number',
         'status',
         'image',
         'description',
@@ -30,6 +30,11 @@ class Inventory extends Model
     public function Branch()
     {
         return $this->belongsTo(Branch::class); //Relación de pertenencia
+    }
+    // Una marca pertenece a un producto del inventario
+    public function Brand()
+    {
+        return $this->belongsTo(Brand::class); //Relación de pertenencia
     }
 
     public function history()

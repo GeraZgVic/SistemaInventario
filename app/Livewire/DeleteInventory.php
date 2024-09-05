@@ -14,7 +14,7 @@ class DeleteInventory extends Component
     {
         $inventory = Inventory::find($this->id);
         $inventory->delete();
-        return redirect()->route('dashboard')->with('alert-danger', 'Se Eliminó Correctamente');
+        return redirect()->route('dashboard')->with('alert-danger', 'ELIMINADO CORRECTAMENTE');
     }
 
     public function render()

@@ -2,7 +2,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Producto ') . $product->brand . ' - ' . $product->id }}
+            {{ __('Producto ') . $product->brand->name . ' - ' . $product->id }}
         </h2>
     </x-slot>
 
@@ -26,7 +26,7 @@
                             <div>
                                 <P class="font-semibold">Modelo: <span class="font-normal">{{ $product->model }} </span>
                                 </P>
-                                <p class="font-semibold">Marca: <span class="font-normal">{{ $product->brand }} </span>
+                                <p class="font-semibold">Marca: <span class="font-normal">{{ $product->brand->name ?? 'Sin marca' }} </span>
                                 </p>
                                 <p class="font-semibold">Mayorista: <span class="font-normal">{{ $product->wholesaler }}
                                     </span></p>
@@ -97,10 +97,9 @@
         
                             @if (is_array($originalAttributes))
                                 <!-- Accede a los valores del array -->
-                                <p><span class="font-semibold">Marca: </span> {{ $originalAttributes['brand'] }}</p>
                                 <p><span class="font-semibold">Estatus actual: </span> {{ 'Dañado' }}</p>
                                 <p><span class="font-semibold">No.Serie: </span>
-                                    {{ $originalAttributes['serial_number'] }}</p>
+                                    {{ $originalAttributes['serial_number'] ? $originalAttributes['serial_number'] : 'S/N'}}</p>
                                 <!-- Agrega más elementos según los datos que desees mostrar -->
                             @endif
                         </div>

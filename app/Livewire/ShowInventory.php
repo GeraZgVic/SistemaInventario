@@ -15,7 +15,10 @@ class ShowInventory extends Component
     use WithPagination;
 
     // #[Url] //Si queremos que muestre la URL
+    #[Url(history: true)]
     public $search = '';
+
+    #[Url(history: true)]
     public $branch_id = '';
 
 
@@ -23,6 +26,12 @@ class ShowInventory extends Component
     {
         $this->resetPage();
     }
+
+    public function updatingBranchId()
+    {
+        $this->resetPage();
+    }
+
 
     public function render()
     {
@@ -32,10 +41,12 @@ class ShowInventory extends Component
         // Filtra los inventarios que coinciden con el término de búsqueda proporcionado por el usuario
         if ($this->search) {
             $query->where(function ($innerQuery) {
-                $innerQuery->where('brand', 'LIKE', "%" . $this->search . "%")
-                    ->orWhere('serial_number', 'LIKE', "%" . $this->search . "%")
+                $innerQuery->where('serial_number', 'LIKE', "%" . $this->search . "%")
                     ->orWhere('model', 'LIKE', "%" . $this->search . "%")
-                    ->orWhere('wholesaler', 'LIKE', "%" .$this->search . "%");
+                    ->orWhere('wholesaler', 'LIKE', "%" . $this->search . "%")
+                    ->orWhereHas('brand', function ($brandQuery) {
+                        $brandQuery->where('name', 'LIKE', "%" . $this->search . "%");
+                    });
             });
         }
 
@@ -46,6 +57,7 @@ class ShowInventory extends Component
                 $innerQuery->where('id', $this->branch_id);
             });
         }
+
 
         $inventories = $query->paginate(4);
         $branches = Branch::all();

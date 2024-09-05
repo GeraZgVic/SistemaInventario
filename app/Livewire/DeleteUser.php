@@ -15,7 +15,7 @@ class DeleteUser extends Component
     {
         $user = User::find($this->id);
         $user->delete();
-        return redirect()->route('users.index')->with('alert-danger', 'Se Eliminó Correctamente');
+        return redirect()->route('users.index')->with('alert-danger', 'ELIMINADO CORRECTAMENTE');
     }
     public function render()
     {

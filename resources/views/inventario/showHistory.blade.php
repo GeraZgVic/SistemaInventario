@@ -23,9 +23,10 @@
                         <h2 class="font-bold text-2xl text-gray-800 uppercase">Información Detallada</h2>
                     </div>
                     <div class="bg-gray-50 max-w-3xl mx-auto rounded-b-md overflow-hidden">
-                        @foreach ($historial as $registro)
+                        @foreach ($historialData as $data)
                             @php
-                                $originalAttributes = json_decode($registro->original_attributes, true);
+                                $registro = $data['registro'];
+                                $originalAttributes = $data['originalAttributes'];
                             @endphp
                             <div class="bg-white border-t border-gray-200 p-6">
                                 <p class="font-semibold text-gray-500 text-center mb-3">Equipo Reemplazado No.
@@ -42,9 +43,8 @@
                                         </p>
                                     @endif
                                     @if (is_array($originalAttributes))
-                                        <!-- Accede a los valores del array -->
-                                        <p><span class="font-semibold">Marca:</span> {{ $originalAttributes['brand'] }}
-                                        </p>
+                                        <p><span class="font-semibold">Marca:</span> {{ $data['brandName'] }}</p>
+                                        <p><span class="font-semibold">Sucursal:</span> {{ $data['branchName'] }}</p>
                                         <p><span class="font-semibold">Modelo:</span> {{ $originalAttributes['model'] }}
                                         </p>
                                         <p><span class="font-semibold">Estatus anterior:</span>
@@ -58,6 +58,7 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>

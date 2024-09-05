@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Brand;
 use App\Models\Branch;
 use Livewire\Component;
 use App\Models\Inventory;
@@ -12,14 +13,14 @@ use Livewire\Attributes\Validate;
 class ModalEditar extends Component
 {
     use WithFileUploads;
-    
+
     public $id;
     public $inventory;
     // #[Validate('required')]
     // public $quantity;
 
     #[Validate('required')]
-    public $brand;
+    public $brand_id;
     #[Validate('max:40')]
     public $model;
     #[Validate('required')]
@@ -33,9 +34,10 @@ class ModalEditar extends Component
     #[Validate('nullable')]
     public $wholesaler;
     public $image;
-    
     #[Validate('image|max:1024|nullable')]
     public $new_image;
+    #[Validate('nullable|max:200')]
+    public $part_number;
 
     // Campos Opcionales - Table: Inventory Details
     public $destination;
@@ -44,11 +46,11 @@ class ModalEditar extends Component
     public $departure_date;
 
 
-    public function mount() {
+    public function mount()
+    {
         $this->inventory = Inventory::find($this->id);
         // Sincronizar formulario con la DB
-        $this->brand = $this->inventory['brand'];
-        // $this->quantity = $this->inventory['quantity'];
+        $this->brand_id = $this->inventory['brand_id'];
         $this->model = $this->inventory['model'];
         $this->status = $this->inventory['status'];
         $this->image = $this->inventory['image'];
@@ -56,20 +58,21 @@ class ModalEditar extends Component
         $this->description = $this->inventory['description'];
         $this->branch_id = $this->inventory['branch_id'];
         $this->serial_number = $this->inventory['serial_number'];
+        $this->part_number = $this->inventory['part_number'];
     }
 
-    public function update() 
+    public function update()
     {
         $datos = $this->validate();
 
-        if($this->new_image) {
+        if ($this->new_image) {
             $imagen = $this->new_image->store('public/images'); //Retornar la imagen nueva con el 'public/images'
             $datos['image'] = str_replace('public/images/', '', $imagen); // Retorna la nueva imagen sin el 'public/images'
         }
 
         $this->inventory->update([
-            'brand' => $datos['brand'],
-            // 'quantity' => $datos['quantity'],
+            'brand_id' => $datos['brand_id'],
+            'part_number' => $datos['part_number'],
             'model' => $datos['model'],
             'serial_number' => $this->serial_number,
             'status' => $datos['status'],
@@ -79,13 +82,17 @@ class ModalEditar extends Component
             'image' => $datos['image'] ?? $this->image
         ]);
 
-        InventoryDetails::create([
-            'inventory_id' => $this->id,
-            'destination' => $this->destination,
-            'previous_inventory_number' => $this->previous_inventory_number,
-            'later_inventory_number' => $this->later_inventory_number,
-            'departure_date' => $this->departure_date
-        ]);
+        // OPCIONALES 
+        if (!empty($this->destination) || !empty($this->previous_inventory_number) || !empty($this->later_inventory_number) || !empty($this->departure_date)) {
+            InventoryDetails::create([
+                'inventory_id' => $this->id,
+                'destination' => $this->destination,
+                'previous_inventory_number' => $this->previous_inventory_number,
+                'later_inventory_number' => $this->later_inventory_number,
+                'departure_date' => $this->departure_date
+            ]);
+        }
+
 
         return redirect()->route('dashboard')->with('alert-success', 'Se Actualizó Correctamente');
     }
@@ -93,8 +100,10 @@ class ModalEditar extends Component
     public function render()
     {
         $branches = Branch::all();
+        $brands = Brand::all();
         return view('livewire.modal-editar', [
-            'branches' => $branches
+            'branches' => $branches,
+            'brands' => $brands
         ]);
     }
 }

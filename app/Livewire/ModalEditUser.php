@@ -74,7 +74,7 @@ class ModalEditUser extends Component
             $this->user->syncRoles([]); // Si no se seleccionan roles, eliminar todos los roles asociados
         }
 
-        return redirect()->route('users.index')->with('alert-success', 'Se Editó Correctamente');
+        return redirect()->route('users.index')->with('alert-success', 'ACTUALIZADO CORRECTAMENTE');
     }
 
 

@@ -29,21 +29,17 @@
                 <form wire:submit='save' class="grid grid-cols-2 gap-1">
                     <!-- Marca -->
                     <div>
-                        <x-input-label for="brand" :value="__('Marca')" />
-                        <input wire:model='brand' id="brand" wire:dirty.class='border-green-500'
-                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
-                            type="text" placeholder="Ej: Fortinet">
-                        <x-input-error :messages="$errors->get('brand')" class="mt-2" />
+                        <x-input-label for="brand_id" :value="__('Marca')" />
+                        <select wire:model="brand_id" id="brand_id" wire:dirty.class='border-green-500'
+                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm">
+                            <option value="">Seleccionar Marca</option>
+                            @foreach ($brands as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error :messages="$errors->get('brand_id')" class="mt-2" />
                     </div>
-                    <!-- Cantidad -->
-                    {{-- <div>
-                        <x-input-label for="quantity" :value="__('Cantidad')" />
-                        <input wire:model='quantity' id="quantity" wire:dirty.class='border-green-500'
-                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
-                            type="number" min="0">
 
-                        <x-input-error :messages="$errors->get('quantity')" class="mt-2" />
-                    </div> --}}
                     <!-- Modelo -->
                     <div>
                         <x-input-label for="model" :value="__('Modelo')" />
@@ -74,6 +70,13 @@
                             type="text" placeholder="Escribe el mayorista">
                         <x-input-error :messages="$errors->get('wholesaler')" class="mt-2" />
                     </div>
+                    <div>
+                        <x-input-label for="part_number" :value="__('Numero de parte')" />
+                        <input wire:model='part_number' id="part_number" wire:dirty.class='border-green-500'
+                            class="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm"
+                            type="text" placeholder="Escribe el mayorista">
+                        <x-input-error :messages="$errors->get('part_number')" class="mt-2" />
+                    </div>
                     {{-- Sucursal --}}
                     <div>
                         <x-input-label for="branch_id" :value="__('Sucursal')" />
@@ -87,7 +90,7 @@
                         <x-input-error :messages="$errors->get('branch_id')" class="mt-2" />
                     </div>
                     {{-- SUBIR IMAGEN --}}
-                    <div class="col-span-2" x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
+                    <div x-data="{ uploading: false, progress: 0 }" x-on:livewire-upload-start="uploading = true"
                         x-on:livewire-upload-finish="uploading = false" x-on:livewire-upload-cancel="uploading = false"
                         x-on:livewire-upload-error="uploading = false"
                         x-on:livewire-upload-progress="progress = $event.detail.progress">
